@@ -1,0 +1,31 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    auxiliary.py                                       :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/08/20 04:08:54 by patrisor          #+#    #+#              #
+#    Updated: 2019/08/20 14:22:22 by patrisor         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+''' COLLISION DETECTION
+m[p.x + 1][p.y]: Checks for wall under you; if there is boundary, return 's'
+m[p.x - 1][p.y]: Checks for wall above you; if there is boundary, return 'w'
+m[p.x][p.y + 1]: Checks for wall to the right; if there is boundary, return 'd'
+m[p.x][p.y - 1]: Checks for wall to the left; if there is boundary, return 'a'
+RETURN List of anticipated moves that can't be made'''
+def check_collision(p, m, i):
+    ret = []
+    if m[p.x][p.y + 1] == i or m[p.x][p.y - 1] == i:
+        ret.append(('d' if m[p.x][p.y + 1] == i else 'a'))
+    if m[p.x + 1][p.y] == i or m[p.x - 1][p.y] == i:
+        ret.append(('s' if m[p.x + 1][p.y] == i else 'w'))
+    return ret
+
+def isCollided(keys, i, inp, hit = 0):
+    if(len(keys[i]) > 0): 
+        for x in range(len(keys[i])): 
+            if keys[i][x] == inp: hit += 1
+    return(True if hit > 0 else False)
