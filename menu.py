@@ -1,7 +1,8 @@
+import getch
 SCREEN_W = 30
 SCREEN_H = 22
 
-def initBox(w, h):
+def initBox(w, h, ar):
 	m = [[" "] * (w) for i in range(h)]
 	m[0][0] = '┌'
 	m[0][w - 1] = '┐'
@@ -26,6 +27,7 @@ def initBox(w, h):
 				 "Equip",
 				 "Exit Game"]
 	z = 0
+	m[ar][5] = '>'
 	for i in range (5, h - 4, (int)((h - 7) / len(menuitems))):
 		for c in range (len(menuitems[z])):
 			itemw = (int)((w - len(menuitems[z])) / 2) + c
@@ -36,23 +38,43 @@ def initBox(w, h):
 		z += 1
 	return m
 
+def updateBox(m, ar, c):
+	for i in range(len(m)):
+		if '>' in m[i]:
+			if (i == 5 and c == "119") or (i == 17 and c == "115"):
+				return ar
+			else:
+				m[i][5] = ' '
+				i = i - 3 if c == "119" else i + 3
+				m[i][5] = '>'
+				return i
+
 def printBox(m):
 	for i in range(len(m)):
 		line = ''.join(m[i])
 		if "Main" in line:
-			print(line[0] + "\033[1m\033[36m" + line[1 : -1] + "\033[0m" + line[-0])
+			print(line[0 : 6] + "\033[1m\033[36m" + line[6 : -1] + "\033[0m" + line[-0])
 		elif "Map" in line:
-			print(line[0] + "\033[1m\033[36m" + line[1 : -1] + "\033[0m" + line[-0])
+			print(line[0 : 6] + "\033[1m\033[36m" + line[6 : -1] + "\033[0m" + line[-0])
 		elif "Back" in line:
-			print(line[0] + "\033[1m\033[33m" + line[1 : -1] + "\033[0m" + line[-0])
+			print(line[0 : 6] + "\033[1m\033[33m" + line[6 : -1] + "\033[0m" + line[-0])
 		elif "Skill" in line:
-			print(line[0] + "\033[1m\033[32m" + line[1 : -1] + "\033[0m" + line[-0])
+			print(line[0 : 6] + "\033[1m\033[32m" + line[6 : -1] + "\033[0m" + line[-0])
 		elif "Equip" in line:
-			print(line[0] + "\033[1m\033[35m" + line[1 : -1] + "\033[0m" + line[-0])
+			print(line[0 : 6] + "\033[1m\033[35m" + line[6 : -1] + "\033[0m" + line[-0])
 		elif "Exit" in line:
-			print(line[0] + "\033[1m\033[31m" + line[1 : -1] + "\033[0m" + line[-0])
+			print(line[0 : 6] + "\033[1m\033[31m" + line[6 : -1] + "\033[0m" + line[-0])
 		else:
 			print(line)
 
-Box = initBox(SCREEN_W, SCREEN_H)
-printBox(Box)
+ar = 5
+Box = initBox(SCREEN_W, SCREEN_H, ar)
+while True:
+	printBox(Box)
+	c = (getch.getch())
+	if c == "113":
+		exit(-1)
+	if c == "119" or c == "115":
+		ar = updateBox(Box, ar, c)
+	if c == '13':
+		print(ar)
