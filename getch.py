@@ -10,16 +10,9 @@ class _Getch:
                 termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
             return ch
 
-def get():
+def getch():
     inkey = _Getch()
     while(1):
             k=inkey()
             if k!='':break
-    print (str(ord(k)))
-
-def main():
-    for i in range(0,3):
-        get()
-
-if __name__=='__main__':
-    main()
+    return str(ord(k))
