@@ -1,6 +1,20 @@
 import getch
+import bag
+import skill
+import equip
+import save
+
 SCREEN_W = 30
 SCREEN_H = 22
+
+class Player:
+	def __init__(self, level, xp, hp, mana, attk, defn):
+		self.level = level
+		self.xp = xp
+		self.hp = hp
+		self.mana = mana
+		self.attk = attk
+		self.defn = defn
 
 def initBox(w, h, ar):
 	m = [[" "] * (w) for i in range(h)]
@@ -69,6 +83,7 @@ def printBox(m):
 
 ar = 5
 Box = initBox(SCREEN_W, SCREEN_H, ar)
+p = Player(4, 105, 75, 50, 10, 0)
 while True:
 	printBox(Box)
 	c = (getch.getch())
@@ -76,5 +91,14 @@ while True:
 		exit(-1)
 	if c == "119" or c == "115":
 		ar = updateBox(Box, ar, c)
-	if c == '13':
-		print(ar)
+	if c == "13":
+		if ar == 5:
+			map.viewMap()
+		elif ar == 8:
+			bag.viewBag()
+		elif ar == 11:
+			skill.viewSkills(p)
+		elif ar == 14:
+			equip.mountItems()
+		elif ar == 18:
+			save.confirm()
