@@ -21,7 +21,7 @@ def initBox(w, h, ar, p):
 		m[2][j] = '─'
 		m[2][j + 2] = '─'
 		m[2][j - 2] = '─'
-	xp = "EXP        level  " + str(p.level)
+	xp = "EXP        level  " + str(p.attributes['level'])
 	for c in range(len(xp)):
 		j = (int)((w - len(xp)) / 2) + c
 		m[3][j] = xp[c]
@@ -32,21 +32,21 @@ def initBox(w, h, ar, p):
 			m[4][c] = ']'
 		else:
 			i = int(((c - 5) / 17) * 100)
-			if p.xp >= 100:
+			if p.attributes['xp'] >= 100:
 				m[4][c] = '▓'
-			elif i <= p.xp:
+			elif i <= p.attributes['xp']:
 				m[4][c] = '░'
 			else:
 				m[4][c] = ' '
-		if p.xp >= 100:
-			upgrade = "upgrades available : " + str(int(p.xp / 100))
+		if p.attributes['xp'] >= 100:
+			upgrade = "upgrades available : " + str(int(p.attributes['xp'] / 100))
 			for i in range(len(upgrade)):
 				m[5][i + 4] = upgrade[i]
 	menuitems = ["",
-				"Health  : " + str(p.hp).rjust(4),
-				"Mana    : " + str(p.mana).rjust(4),
-				"Attack  : " + str(p.attk).rjust(4),
-                "Defense : " + str(p.defn).rjust(4),
+				"Health  : " + str(p.attributes['Health']).rjust(4),
+				"Mana    : " + str(p.attributes['Mana']).rjust(4),
+				"Attack  : " + str(p.attributes['Attack']).rjust(4),
+                "Defense : " + str(p.attributes['Defense']).rjust(4),
 				"Exit Menu"]
 	z = 0
 	m[ar][5] = '>'
@@ -60,7 +60,7 @@ def initBox(w, h, ar, p):
 def updateBox(m, ar, c, p):
 	for i in range(len(m)):
 		if '>' in m[i]:
-			if (i == 7 and c == "119") or (i == 19 and c == "115") or (p.xp < 100):
+			if (i == 7 and c == "119") or (i == 19 and c == "115") or (p.attributes['xp'] < 100):
 				return ar
 			else:
 				m[i][5] = ' '
@@ -97,6 +97,31 @@ def printConfirm(w, h, skill, ar):
 		print(line)
 	return m
 
+def increaser(p, k):
+	x = int(p.attributes['level'] / 5)
+	y = int(p.attributes['level'] % 5)
+	z = int(p.attributes['level'] * .825884)
+	if y < 2:
+		y += 1
+	else:
+		y = 3
+	if k == "Health":
+		p.attributes[k] = p.attributes[k] + z + (((2 * (10 * x)) + 5  + 15) * y)
+		p.attributes[k] = p.attributes[k] - p.attributes[k] % (p.attributes['level'] * 3 + p.attributes['level']) * 5
+		p.attributes[k] = p.attributes[k] - p.attributes[k] % 5
+	elif k == "Mana":
+		p.attributes[k] = p.attributes[k] + z + (((((x + 1) * 5) * 2) - 1) + y)
+		p.attributes[k] = p.attributes[k] - p.attributes[k] % 5
+	else:
+		val = int(((z + x + y) * 10) / 10)
+		val = p.attributes[k] % y + val
+		p.attributes[k] += int((val / 2) + 1)
+	p.attributes['xp'] -= 100
+	p.attributes['Health'] += 5
+	p.attributes['Attack'] += 1
+	p.attributes['Defense'] += 1
+	p.attributes['level'] += 1
+
 def improve(m, player, skill):
 	ar = 9
 	while True:
@@ -107,19 +132,17 @@ def improve(m, player, skill):
 				if '>' in m[i]:
 					if (i == 7 and c == "119") or (i == 9 and c == "115"):
 						ar = i
-						break
 					else:
 						m[i][int(SCREEN_W / 3)] = ' '
 						i = i - 2 if c == "119" else i + 2
 						m[i][int(SCREEN_W / 3)] = '>'
 						ar = i
-						break
+					break
 		if c == "13":
 			if ar == 9:
 				return
 			if ar == 7:
-				player.xp -= 100
-				player.hp += 100
+				increaser(player, skill)
 				ar = updateBox(m, ar, c, player)
 				return
 
@@ -134,7 +157,7 @@ def printBox(m):
 	print (box, end = '')
 
 def arSet(p):
-	if p.xp < 100:
+	if p.attributes['xp'] < 100:
 		return 19
 	else:
 		return 7

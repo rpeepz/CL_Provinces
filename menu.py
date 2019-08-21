@@ -9,12 +9,14 @@ SCREEN_H = 22
 
 class Player:
 	def __init__(self, level, xp, hp, mana, attk, defn):
-		self.level = level
-		self.xp = xp
-		self.hp = hp
-		self.mana = mana
-		self.attk = attk
-		self.defn = defn
+		self.attributes = {
+			'level': level,
+			'xp': xp,
+			'Health': hp,
+			'Mana': mana,
+			'Attack': attk,
+			'Defense': defn,
+		}
 
 def initBox(w, h, ar):
 	m = [[" "] * (w) for i in range(h)]
@@ -83,7 +85,7 @@ def printBox(m):
 
 ar = 5
 Box = initBox(SCREEN_W, SCREEN_H, ar)
-p = Player(1, 100, 100, 50, 10, 0)
+p = Player(1, 0, 50, 20, 6, 0)
 while True:
 	printBox(Box)
 	c = (getch.getch())
