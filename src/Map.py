@@ -6,7 +6,7 @@
 #    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/20 00:06:24 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/20 14:22:24 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/20 14:34:01 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ class Map:
                     elif c == len(self.map[r]) - 1: out += "┘"
                     else: out += "──"
             out += "\n"
-        print(out + "CONTROLS:\n" + self.controls() + "SKILLS:\n" + p.skillTreeToString())
+        print(out + "CONTROLS:\n" + self.controls() + "SKILLS:\n" + p.skillTreeToString() + "\n\n\n\n")
 
     # Function SAVES the old address of the player position, then updates it with player pos
     def updateMap(self, i, p):
