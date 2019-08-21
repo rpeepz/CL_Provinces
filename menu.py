@@ -83,24 +83,27 @@ def printBox(m):
 		else:
 			print(line)
 
-ar = 5
-Box = initBox(SCREEN_W, SCREEN_H, ar)
+def openMenu():
+	ar = 5
+	Box = initBox(SCREEN_W, SCREEN_H, ar)
+	while True:
+		printBox(Box)
+		c = (getch.getch())
+		if c == "112":
+			return
+		if c == "119" or c == "115":
+			ar = updateBox(Box, ar, c)
+		if c == "13":
+			if ar == 5:
+				map.viewMap()
+			elif ar == 8:
+				bag.viewBag()
+			elif ar == 11:
+				skill.viewSkills(p)
+			elif ar == 14:
+				equip.mountItems()
+			elif ar == 17:
+				save.confirmExit()
+
 p = Player(1, 0, 50, 20, 6, 0)
-while True:
-	printBox(Box)
-	c = (getch.getch())
-	if c == "113":
-		exit(-1)
-	if c == "119" or c == "115":
-		ar = updateBox(Box, ar, c)
-	if c == "13":
-		if ar == 5:
-			map.viewMap()
-		elif ar == 8:
-			bag.viewBag()
-		elif ar == 11:
-			skill.viewSkills(p)
-		elif ar == 14:
-			equip.mountItems()
-		elif ar == 18:
-			save.confirm()
+openMenu()

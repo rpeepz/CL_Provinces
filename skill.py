@@ -68,7 +68,7 @@ def updateBox(m, ar, c, p):
 				m[i][5] = '>'
 				return i
 
-def printConfirm(w, h, skill, ar):
+def printConfirm(w, h, opt, ar):
 	text = "confirm ?"
 	m = [[" "] * (w) for i in range(h + 1)]
 	s = int((w/2) - (w/4))
@@ -84,8 +84,8 @@ def printConfirm(w, h, skill, ar):
 		m[0][i] = '─'
 		m[2][i] = '─'
 		m[h][i] = '─'
-	for i in range(len(skill)):
-		m[1][int((w - len(skill)) / 2) + i] = skill[i]
+	for i in range(len(opt)):
+		m[1][int((w - len(opt)) / 2) + i] = opt[i]
 	for i in range(len(text)):
 		m[4][int((w - len(text)) / 2) + i] = text[i]
 		m[5][int((w - len(text)) / 2) + i] = '─'
@@ -177,8 +177,6 @@ def viewSkills(player):
 		Box = initBox(SCREEN_W, SCREEN_H, ar, player)
 		printBox(Box)
 		c = getch.getch()
-		if c == "113":
-			exit(-1)
 		if c == "119" or c == "115":
 			ar = updateBox(Box, ar, c, player)
 		if c == "13":

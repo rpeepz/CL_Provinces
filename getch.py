@@ -15,4 +15,5 @@ def getch():
     while(1):
             k=inkey()
             if k!='':break
+    if str(ord(k)) == "27": exit(-1)
     return str(ord(k))
