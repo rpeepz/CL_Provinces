@@ -83,7 +83,7 @@ def printBox(m):
 
 ar = 5
 Box = initBox(SCREEN_W, SCREEN_H, ar)
-p = Player(4, 105, 75, 50, 10, 0)
+p = Player(1, 100, 100, 50, 10, 0)
 while True:
 	printBox(Box)
 	c = (getch.getch())

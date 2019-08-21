@@ -1,14 +1,8 @@
 import getch
 SCREEN_W = 30
 SCREEN_H = 22
-player_level = 4
-player_xp = 105
-player_hp = 75
-player_mana = 50
-player_attk = 10
-player_def = 0
 
-def initBox(w, h, ar):
+def initBox(w, h, ar, p):
 	m = [[" "] * (w) for i in range(h)]
 	m[0][0] = '┌'
 	m[0][w - 1] = '┐'
@@ -27,7 +21,7 @@ def initBox(w, h, ar):
 		m[2][j] = '─'
 		m[2][j + 2] = '─'
 		m[2][j - 2] = '─'
-	xp = "EXP        level  " + str(player_level)
+	xp = "EXP        level  " + str(p.level)
 	for c in range(len(xp)):
 		j = (int)((w - len(xp)) / 2) + c
 		m[3][j] = xp[c]
@@ -38,21 +32,21 @@ def initBox(w, h, ar):
 			m[4][c] = ']'
 		else:
 			i = int(((c - 5) / 17) * 100)
-			if player_xp >= 100:
+			if p.xp >= 100:
 				m[4][c] = '▓'
-			elif i <= player_xp:
+			elif i <= p.xp:
 				m[4][c] = '░'
 			else:
 				m[4][c] = ' '
-		if player_xp >= 100:
-			upgrade = "upgrades available : " + str(int(player_xp / 100))
+		if p.xp >= 100:
+			upgrade = "upgrades available : " + str(int(p.xp / 100))
 			for i in range(len(upgrade)):
 				m[5][i + 4] = upgrade[i]
 	menuitems = ["",
-				"Health  : " + str(player_hp).rjust(4),
-				"Mana    : " + str(player_mana).rjust(4),
-				"Attack  : " + str(player_attk).rjust(4),
-                "Defense : " + str(player_def).rjust(4),
+				"Health  : " + str(p.hp).rjust(4),
+				"Mana    : " + str(p.mana).rjust(4),
+				"Attack  : " + str(p.attk).rjust(4),
+                "Defense : " + str(p.defn).rjust(4),
 				"Exit Menu"]
 	z = 0
 	m[ar][5] = '>'
@@ -63,10 +57,10 @@ def initBox(w, h, ar):
 		z += 1
 	return m
 
-def updateBox(m, ar, c):
+def updateBox(m, ar, c, p):
 	for i in range(len(m)):
 		if '>' in m[i]:
-			if (i == 7 and c == "119") or (i == 19 and c == "115") or (player_xp < 100):
+			if (i == 7 and c == "119") or (i == 19 and c == "115") or (p.xp < 100):
 				return ar
 			else:
 				m[i][5] = ' '
@@ -103,7 +97,7 @@ def printConfirm(w, h, skill, ar):
 		print(line)
 	return m
 
-def improve(player, skill):
+def improve(m, player, skill):
 	ar = 9
 	while True:
 		m = printConfirm(SCREEN_W, 10, skill, ar)
@@ -126,6 +120,7 @@ def improve(player, skill):
 			if ar == 7:
 				player.xp -= 100
 				player.hp += 100
+				ar = updateBox(m, ar, c, player)
 				return
 
 def printBox(m):
@@ -138,12 +133,13 @@ def printBox(m):
 			box = box + line + '\n'
 	print (box, end = '')
 
-def viewSkills(player):
-	if player_xp < 100:
-		ar = 19
+def arSet(p):
+	if p.xp < 100:
+		return 19
 	else:
-		ar = 7
-	Box = initBox(SCREEN_W, SCREEN_H, ar)
+		return 7
+
+def viewSkills(player):
 	print("this will be the skill tree menu")
 	print('')
 	print('')
@@ -153,21 +149,24 @@ def viewSkills(player):
 	print('')
 	print("here you will also be able to view current exp")
 	print("and total of stats such as hp and attack")
+	ar = arSet(player)
 	while True:
+		Box = initBox(SCREEN_W, SCREEN_H, ar, player)
 		printBox(Box)
 		c = getch.getch()
 		if c == "113":
 			exit(-1)
 		if c == "119" or c == "115":
-			ar = updateBox(Box, ar, c)
+			ar = updateBox(Box, ar, c, player)
 		if c == "13":
 			if ar == 19:
 				return
 			if ar == 7:
-				improve(player, "Health")
+				improve(Box, player, "Health")
 			if ar == 10:
-				improve(player, "Mana")
+				improve(Box, player, "Mana")
 			if ar == 13:
-				improve(player, "Attack")
+				improve(Box, player, "Attack")
 			if ar == 16:
-				improve(player, "Defense")
+				improve(Box, player, "Defense")
+			ar = arSet(player)
