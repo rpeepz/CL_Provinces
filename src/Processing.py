@@ -6,7 +6,7 @@
 #    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/21 01:34:12 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:24:10 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/22 04:44:29 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ def itemPickUp(p, c, r):
     if Auxiliary.isCollided(c, 1, r): # GOLD
         p.gold += random.randint(5, 15)
     if Auxiliary.isCollided(c, 2, r): #SWORD
-        p.attack += 15
+        p.attributes['Strength'] += 15
 
 # Takes in a valid-input parameter, and a valid data type you want to comapre it to
 # Returns array of these found parameters
@@ -49,6 +49,6 @@ def processInput(p, m, i, SCREEN_W = 30, SCREEN_H = 22):
         itemPickUp(p, collisions, ret)
         # Collision between enemies
         if Auxiliary.isCollided(collisions, 3, ret): 
-            
+            #p.attributes["Health"] -= 
             continue
         return ret
