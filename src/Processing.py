@@ -1,17 +1,5 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Processing.py                                      :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/08/21 01:34:12 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:51:51 by patrisor         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 import Auxiliary
-import getch
+import Getch
 import random
 import Menu
 
@@ -41,7 +29,7 @@ def isValid(inp, inputs):
 def processInput(p, m, i, e, SCREEN_W = 30, SCREEN_H = 22):
     collisions = Auxiliary.getCollisions(p, m, i)
     while True:
-        ret = getch.getch()
+        ret = Getch.getch()
         if ret == "p": Menu.openMenu(p, SCREEN_W, SCREEN_H)
         # NOTE: DO NOT DELETE -> Collision detected if length of keys is greater than 0
         if Auxiliary.isCollided(collisions, 0, ret): continue
