@@ -1,0 +1,13 @@
+def mountItems():
+    print("here you can place items on your person")
+    print("to give bonuses to skills you currentl have")
+    print('')
+    print('')
+    print('but your bag is tiny')
+    print('')
+    print('')
+    print('and also you have no items')
+    print('')
+    print('')
+    print('')
+    print('you will always die first')
