@@ -6,7 +6,7 @@
 #    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/21 01:34:12 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 03:31:00 by rpapagna         ###   ########.fr        #
+#    Updated: 2019/08/22 04:06:41 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,4 +45,6 @@ def processInput(p, m, i):
         if Auxiliary.isCollided(collisions, 0, ret): continue
         # Update User Skill Tree
         itemPickUp(p, collisions, ret)
+        # Collision between enemies
+        if Auxiliary.isCollided(collisions, 3, ret): continue
         return ret

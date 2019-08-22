@@ -6,7 +6,7 @@
 #    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/20 04:08:54 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/21 01:45:51 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/22 04:02:31 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,4 +36,4 @@ def isCollided(keys, i, inp, hit = 0):
 # update the third parameter to the item you are looking for
 def getCollisions(PLAYER, MAP, ITEMS):
     return [check_collision(PLAYER, MAP.map, 1), check_collision(PLAYER, MAP.map, ITEMS.COINS),
-            check_collision(PLAYER, MAP.map, ITEMS.KNIFE)]
+            check_collision(PLAYER, MAP.map, ITEMS.KNIFE), check_collision(PLAYER, MAP.map, 20)]

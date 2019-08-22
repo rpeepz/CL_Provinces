@@ -1,12 +1,13 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Maps.py                                            :+:      :+:    :+:    #
+#    Map.py                                             :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
+#    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/20 00:06:24 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 02:44:15 by rpapagna         ###   ########.fr        #
+#    Updated: 2019/08/22 04:02:36 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/21 02:04:05 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +15,7 @@ import random
 
 class TestMap:
 
-    def __init__(self, w, h, p, i):
+    def __init__(self, w, h, p, i, enemies):
         ret = [([1] * w)] + ([([1] + ([0] * (w - 2)) + [1]) for _ in range(h - 2)]) + [([1] * w)]
         # Places character
         ret[p.x][p.y] = 2
@@ -27,6 +28,9 @@ class TestMap:
             if ret[r][c] != 0: continue
             ret[r][c] = i.KNIFE
             break
+        # Place Enemies
+        for e in enemies:
+            ret[e.x][e.y] = e.id
         self.map = ret
 
     def controls(self):
@@ -49,10 +53,11 @@ class TestMap:
                     else: out += "──"
                 if r > 0 and r < len(self.map) - 1:
                     if self.map[r][c] == 1: out += "│"
-                    elif self.map[r][c] == p.id: out += "🕺"
-                    elif self.map[r][c] == i.COINS: out += "💰"
-                    elif self.map[r][c] == i.KNIFE: out += "🔪"
-                    else: out += "  "
+                    if self.map[r][c] == p.id: out += "🕺"
+                    if self.map[r][c] == i.COINS: out += "💰"
+                    if self.map[r][c] == i.KNIFE: out += "🔪"
+                    if self.map[r][c] == 20: out += "🦍" 
+                    if self.map[r][c] == 0: out += "  "
                 if r == len(self.map) - 1:
                     if c == 0: out += "└"
                     elif c == len(self.map[r]) - 1: out += "┘"
