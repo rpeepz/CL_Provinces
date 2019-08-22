@@ -1,2 +1,2 @@
-# CL_Provice
+# CL_Provinces
 command line rpg
