@@ -3,13 +3,20 @@
 #                                                         :::      ::::::::    #
 #    main.py                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/19 20:04:28 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/21 01:46:46 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/22 04:05:16 by rpapagna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+import sys
+sys.path.append('utils')
+import getch				#key input
+import screens				#screen interfaces
+sys.path.append('menu')
+import menu
+sys.path.append('src')
 import Maps
 import Objects
 import Processing
