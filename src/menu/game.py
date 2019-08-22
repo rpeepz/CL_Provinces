@@ -6,18 +6,22 @@ SCREEN_W = 30		#global menu screen dimentions
 SCREEN_H = 22
 
 class Player:
-	def __init__(self, level, xp, hp, mana, stren, defn):
+	def __init__(self, x, y):
+                self.x = x
+                self.y = y
 		self.attributes = {
-		'level': level,
-		'xp': xp,
-		'Health': hp,
-		'Mana': mana,
-		'Strength': stren,
-		'Defense': defn,
+		'level': 1,
+		'xp': 0,
+		'Health': 50,
+		'Mana': 20,
+		'Strength': 6,
+		'Defense': 0,
 		}
 		self.weapon = ["None", 0]
 		self.armor = ["Chest Plate", 6]
+                self.gold = 0
 
+        # Increases stats (p = Player; k = skill you want affected)
 	def increase(self, p, k):
 		x = int(p.attributes['level'] / 5)
 		y = int(p.attributes['level'] % 5)
@@ -43,8 +47,11 @@ class Player:
 		p.attributes['Defense'] += 1
 		p.attributes['level'] += 1
 
+            # TODO: Add
+        def skillTreeToString(self):
+            return("GOLD: " + str(self.gold) + "\nATTACK: " + str(self.attack))
+
 def env():
-	p = Player(1, 100, 50, 20, 6, 0)
 	menu.openMenu(p, SCREEN_W, SCREEN_H)
 
 env()
