@@ -1,9 +1,9 @@
-import getch
-import screens
-import bag
-import skill
-import equip
-import save
+import Getch
+import Screens
+import Bag
+import Skill
+import Equip
+import Save
 
 def openMenu(p, w, h):
 	ar = 5

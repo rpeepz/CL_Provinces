@@ -1,5 +1,5 @@
-import getch
-import screens
+import Getch
+import Screens
 
 def improve(m, player, skill):
 	ar = 9
