@@ -1,5 +1,5 @@
-import getch
-import screens
+import Getch
+import Screens
 
 def confirmExit(player, w, h):
 	ar = 9

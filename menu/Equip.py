@@ -1,5 +1,5 @@
-import getch
-import screens
+import Getch
+import Screens
 
 def mountItems(player, w, h):
     ar = 8

@@ -6,16 +6,16 @@
 #    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/19 20:04:28 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:05:16 by rpapagna         ###   ########.fr        #
+#    Updated: 2019/08/22 04:08:26 by rpapagna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import sys
 sys.path.append('utils')
-import getch				#key input
-import screens				#screen interfaces
+import Getch				#key input
+import Screens				#screen interfaces
 sys.path.append('menu')
-import menu
+import Menu
 sys.path.append('src')
 import Maps
 import Objects
