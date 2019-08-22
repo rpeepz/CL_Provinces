@@ -6,9 +6,9 @@ def improve(m, player, skill):
 	while True:
 		m = screens.printConfirm(len(m[0]), 10, skill, ar)
 		c = getch.getch()
-		if c == "119" or c == "115":
+		if c == 'w' or c == 's':
 			ar = screens.updateConfirm(m, c)
-		if c == "13":
+		if c == '\r':
 			if ar == 9:
 				return
 			if ar == 7:
@@ -22,9 +22,9 @@ def viewSkills(player, w, h):
 		Box = screens.initSkills(w, h, ar, player)
 		screens.printSkills(Box)
 		c = getch.getch()
-		if c == "119" or c == "115":
+		if c == 'w' or c == 's':
 			ar = screens.updateSkill(Box, ar, c, player)
-		if c == "13":
+		if c == '\r':
 			if ar == 19:
 				return
 			if ar == 7:

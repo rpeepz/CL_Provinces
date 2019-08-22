@@ -58,11 +58,11 @@ def printMenu(m):
 def updateMenu(m, ar, c):
 	for i in range(len(m)):
 		if '>' in m[i]:
-			if (i == 5 and c == "119") or (i == 17 and c == "115"):
+			if (i == 5 and c == 'w') or (i == 17 and c == 's'):
 				return ar
 			else:
 				m[i][5] = ' '
-				i = i - 3 if c == "119" else i + 3
+				i = i - 3 if c == 'w' else i + 3
 				m[i][5] = '>'
 				return i
 
@@ -135,11 +135,11 @@ def printSkills(m):
 def updateSkill(m, ar, c, p):
 	for i in range(len(m)):
 		if '>' in m[i]:
-			if (i == 7 and c == "119") or (i == 19 and c == "115") or (p.attributes['xp'] < 100):
+			if (i == 7 and c == 'w') or (i == 19 and c == 's') or (p.attributes['xp'] < 100):
 				return ar
 			else:
 				m[i][5] = ' '
-				i = i - 3 if c == "119" else i + 3
+				i = i - 3 if c == 'w' else i + 3
 				m[i][5] = '>'
 				return i
 
@@ -236,10 +236,10 @@ def printConfirm(w, h, opt, ar):
 def updateConfirm(m, c):
 	for i in range(len(m)):
 		if '>' in m[i]:
-			if (i == 7 and c == "119") or (i == 9 and c == "115"):
+			if (i == 7 and c == 'w') or (i == 9 and c == 's'):
 				return i
 			else:
 				m[i][int(len(m[0]) / 3)] = ' '
-				i = i - 2 if c == "119" else i + 2
+				i = i - 2 if c == 'w' else i + 2
 				m[i][int(len(m[0]) / 3)] = '>'
 				return i

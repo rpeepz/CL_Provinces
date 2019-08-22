@@ -6,9 +6,9 @@ def confirmExit(player, w, h):
 	while True:
 		m = screens.printConfirm(w, 10, "exit ", ar)
 		c = getch.getch()
-		if c == "119" or c == "115":
+		if c == 'w' or c == 's':
 			ar = screens.updateConfirm(m, c)
-		if c == "13":
+		if c == '\r':
 			if ar == 7:
 				print("save and quit successful")
 				exit(-1)

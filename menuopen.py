@@ -1,5 +1,8 @@
+import sys
+sys.path.append('utils')
 import getch				#key input
 import screens				#screen interfaces
+sys.path.append('menu')
 import menu 				#menu access
 
 SCREEN_W = 30		#global menu screen dimentions

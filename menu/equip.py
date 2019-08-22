@@ -7,5 +7,5 @@ def mountItems(player, w, h):
     while True:
         screens.printMenu(Box)
         c = getch.getch()
-        if c == "13":
+        if c == '\r':
             return

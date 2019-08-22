@@ -11,11 +11,11 @@ def openMenu(p, w, h):
 	while True:
 		screens.printMenu(Box)
 		c = (getch.getch())
-		if c == "112":
+		if c == 'p':
 			return
-		if c == "119" or c == "115":
+		if c == 'w' or c == 's':
 			ar = screens.updateMenu(Box, ar, c)
-		if c == "13":
+		if c == '\r':
 			if ar == 5:
 				map.viewMap()
 			elif ar == 8:

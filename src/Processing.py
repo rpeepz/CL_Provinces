@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Processing.py                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/21 01:34:12 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/21 01:42:41 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/22 03:31:00 by rpapagna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import Auxiliary
-import Getch
+import getch
 import random
 
 # Quits our game if input is 'q'
@@ -37,13 +37,10 @@ def isValid(inp, inputs):
 
 # Basic processing of input to see if input is valid
 # Checks if key passed was valid to aid with collision
-def processInput(p, m, i, valid_inputs = ['w', 'a', 's', 'd', 'p']):
+def processInput(p, m, i):
     collisions = Auxiliary.getCollisions(p, m, i)
     while True:
-        ret = Getch.get()
-        if die(ret[0]) or isValid(ret, valid_inputs) == '':
-            print("Invalid Input\r")
-            continue
+        ret = getch.getch()
         # NOTE: DO NOT DELETE -> Collision detected if length of keys is greater than 0
         if Auxiliary.isCollided(collisions, 0, ret): continue
         # Update User Skill Tree
