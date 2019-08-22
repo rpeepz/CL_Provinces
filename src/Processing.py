@@ -6,13 +6,14 @@
 #    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/21 01:34:12 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:14:06 by rpapagna         ###   ########.fr        #
+#    Updated: 2019/08/22 04:24:10 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import Auxiliary
-import Getch
+import getch
 import random
+import Menu
 
 # Quits our game if input is 'q'
 def die(i):
@@ -37,14 +38,17 @@ def isValid(inp, inputs):
 
 # Basic processing of input to see if input is valid
 # Checks if key passed was valid to aid with collision
-def processInput(p, m, i):
+def processInput(p, m, i, SCREEN_W = 30, SCREEN_H = 22):
     collisions = Auxiliary.getCollisions(p, m, i)
     while True:
-        ret = Getch.getch()
+        ret = getch.getch()
+        if ret == "p": Menu.openMenu(p, SCREEN_W, SCREEN_H)
         # NOTE: DO NOT DELETE -> Collision detected if length of keys is greater than 0
         if Auxiliary.isCollided(collisions, 0, ret): continue
         # Update User Skill Tree
         itemPickUp(p, collisions, ret)
         # Collision between enemies
-        if Auxiliary.isCollided(collisions, 3, ret): continue
+        if Auxiliary.isCollided(collisions, 3, ret): 
+            
+            continue
         return ret
