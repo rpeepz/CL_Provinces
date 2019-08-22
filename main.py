@@ -6,7 +6,7 @@
 #    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/19 20:04:28 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:15:40 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/22 04:48:17 by patrisor         ###   ########.fr        #
 #    Updated: 2019/08/22 04:08:26 by rpapagna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -46,7 +46,7 @@ def main():
         # Print Updated Map
         MAP.printMap(PLAYER, ITEMS)
         # Input
-        inp = Processing.processInput(PLAYER, MAP, ITEMS)
+        inp = Processing.processInput(PLAYER, MAP, ITEMS, ENEMIES)
         # Update Map, based on input and player position
         MAP.updateMap(inp, PLAYER)
     return(0)
