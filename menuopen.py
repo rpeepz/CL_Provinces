@@ -1,9 +1,9 @@
 import sys
 sys.path.append('utils')
-import getch				#key input
-import screens				#screen interfaces
+import Getch				#key input
+import Screens				#screen interfaces
 sys.path.append('menu')
-import menu 				#menu access
+import Menu 				#menu access
 
 SCREEN_W = 30		#global menu screen dimentions
 SCREEN_H = 22
@@ -48,6 +48,6 @@ class Player:
 
 def env():
 	p = Player(1, 100, 50, 20, 6, 0)
-	menu.openMenu(p, SCREEN_W, SCREEN_H)
+	Menu.openMenu(p, SCREEN_W, SCREEN_H)
 
 env()

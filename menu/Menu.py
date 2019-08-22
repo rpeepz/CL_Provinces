@@ -7,22 +7,22 @@ import Save
 
 def openMenu(p, w, h):
 	ar = 5
-	Box = screens.initMenu(w, h, ar)
+	Box = Screens.initMenu(w, h, ar)
 	while True:
-		screens.printMenu(Box)
-		c = (getch.getch())
+		Screens.printMenu(Box)
+		c = (Getch.getch())
 		if c == 'p':
 			return
 		if c == 'w' or c == 's':
-			ar = screens.updateMenu(Box, ar, c)
+			ar = Screens.updateMenu(Box, ar, c)
 		if c == '\r':
 			if ar == 5:
-				map.viewMap()
+				Map.viewMap()
 			elif ar == 8:
-				bag.viewBag()
+				Bag.viewBag()
 			elif ar == 11:
-				skill.viewSkills(p, w, h)
+				Skill.viewSkills(p, w, h)
 			elif ar == 14:
-				equip.mountItems(p, w * 2, h)
+				Equip.mountItems(p, w * 2, h)
 			elif ar == 17:
-				save.confirmExit(p, w, h)
+				Save.confirmExit(p, w, h)

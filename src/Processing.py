@@ -6,12 +6,12 @@
 #    By: rpapagna <rpapagna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/21 01:34:12 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:06:41 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/22 04:14:06 by rpapagna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 import Auxiliary
-import getch
+import Getch
 import random
 
 # Quits our game if input is 'q'
@@ -40,7 +40,7 @@ def isValid(inp, inputs):
 def processInput(p, m, i):
     collisions = Auxiliary.getCollisions(p, m, i)
     while True:
-        ret = getch.getch()
+        ret = Getch.getch()
         # NOTE: DO NOT DELETE -> Collision detected if length of keys is greater than 0
         if Auxiliary.isCollided(collisions, 0, ret): continue
         # Update User Skill Tree
