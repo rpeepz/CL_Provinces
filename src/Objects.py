@@ -6,15 +6,17 @@
 #    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/19 23:45:38 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:46:17 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/27 01:04:29 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+import random
+import Astar
 
 class Player:
     def __init__(self, x, y):
         self.id = 2
-        self.x = x
-        self.y = y
+        self.coords = [x, y]
         self.attributes = {
         'level': 1,
         'xp': 0,
@@ -53,6 +55,12 @@ class Player:
         p.attributes['Defense'] += 1
         p.attributes['level'] += 1
 
+    def move(self, m, i):
+        m[self.coords[0]][self.coords[1]] = 0
+        if i == 'w' or i == 's': self.coords[0] += (1 if i == 's' else -1) 
+        if i == 'a' or i == 'd': self.coords[1] += (1 if i == 'd' else -1)
+        m[self.coords[0]][self.coords[1]] = 2
+
         # TODO: Add
     def skillTreeToString(self):
         ret = "HEALTH: " + str(self.attributes["Health"])
@@ -64,10 +72,17 @@ class Enemy:
 
     def __init__(self, x, y):
         self.id = 20
-        self.x = x
-        self.y = y
+        self.coords = [x, y]
         self.health = 10
         self.attack = 10
+
+    # TODO: Update
+    def move(self, m, p):
+        m[self.coords[0]][self.coords[1]] = 0
+        path = Astar.search(m, tuple(self.coords), tuple(p.coords))[1:]
+        self.coords[0] = path[0][0]
+        self.coords[1] = path[0][1]
+        m[self.coords[0]][self.coords[1]] = self.id
 
 class Items:
 
@@ -75,3 +90,15 @@ class Items:
         #self.inventory = [[3]] + [[s for s in range(4, 14, 1)]] + [[p for p in range(14, 24, 1)]]
         self.KNIFE = 4
         self.COINS = 3
+
+def spawnEnemies(n, w, h):
+    ret = []
+    oldX = oldY = 0
+    for i in range(n):
+        x = random.randint(1, w - 2)
+        y = random.randint(1, h - 2)
+        if x == oldX and y == oldY: continue
+        ret.append(Enemy(x, y))
+        oldX = x
+        oldY = y
+    return ret

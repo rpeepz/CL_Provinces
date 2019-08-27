@@ -6,7 +6,7 @@
 #    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/20 04:08:54 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:02:31 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/26 22:32:27 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ RETURN List of anticipated moves that can't be made'''
 # NOTE: p can be substituted for enemy class
 def check_collision(p, m, i):
     ret = []
-    if m[p.x][p.y + 1] == i or m[p.x][p.y - 1] == i:
-        ret.append(('d' if m[p.x][p.y + 1] == i else 'a'))
-    if m[p.x + 1][p.y] == i or m[p.x - 1][p.y] == i:
-        ret.append(('s' if m[p.x + 1][p.y] == i else 'w'))
+    if m[p.coords[0]][p.coords[1] + 1] == i or m[p.coords[0]][p.coords[1] - 1] == i:
+        ret.append(('d' if m[p.coords[0]][p.coords[1] + 1] == i else 'a'))
+    if m[p.coords[0] + 1][p.coords[1]] == i or m[p.coords[0] - 1][p.coords[1]] == i:
+        ret.append(('s' if m[p.coords[0] + 1][p.coords[1]] == i else 'w'))
     return ret
 
 def isCollided(keys, i, inp, hit = 0):

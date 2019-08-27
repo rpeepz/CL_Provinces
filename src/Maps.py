@@ -6,7 +6,7 @@
 #    By: patrisor <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/20 00:06:24 by patrisor          #+#    #+#              #
-#    Updated: 2019/08/22 04:02:36 by patrisor         ###   ########.fr        #
+#    Updated: 2019/08/27 01:04:34 by patrisor         ###   ########.fr        #
 #    Updated: 2019/08/21 02:04:05 by patrisor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
@@ -18,7 +18,7 @@ class TestMap:
     def __init__(self, w, h, p, i, enemies):
         ret = [([1] * w)] + ([([1] + ([0] * (w - 2)) + [1]) for _ in range(h - 2)]) + [([1] * w)]
         # Places character
-        ret[p.x][p.y] = 2
+        ret[p.coords[0]][p.coords[1]] = 2
         # Randomizes Coin drops
         for r in range(25): ret[random.randint(1, w - 2)][random.randint(1, h - 2)] = i.COINS
         # PLACE WEAPONS
@@ -30,7 +30,7 @@ class TestMap:
             break
         # Place Enemies
         for e in enemies:
-            ret[e.x][e.y] = e.id
+            ret[e.coords[0]][e.coords[1]] = e.id
         self.map = ret
 
     def controls(self):
@@ -42,7 +42,7 @@ class TestMap:
         '''
         print('\n')
         for r in range(len(self.map)):
-            print(' '.join(str(e) for e in self.map[r])) 
+            print(str(r) + ' ' + ' '.join(str(e) for e in self.map[r])) 
         '''
         out = ""
         for r in range(len(self.map)):
@@ -63,12 +63,12 @@ class TestMap:
                     elif c == len(self.map[r]) - 1: out += "┘"
                     else: out += "──"
             out += "\n"
-        print(out + "CONTROLS:\n" + self.controls() + "SKILLS:\n" + p.skillTreeToString() + "\n\n\n\n")
+        print(out + "CONTROLS:\n" + self.controls() + "SKILLS:\n" + p.skillTreeToString() + "\n\n\n")
 
-    # Function SAVES the old address of the player position, then updates it with player pos
-    def updateMap(self, i, p):
-        self.map[p.x][p.y] = 0
-        if i == 'a' or i == 'd': p.y += (1 if i == 'd' else -1)
-        if i == 'w' or i == 's': p.x += (1 if i == 's' else -1)
-        self.map[p.x][p.y] = 2
+    # Function SAVES the old address of the player position, then updates it with player / ENEMY pos
+    def updateMap(self, i, p, enemies, t):
+        p.move(self.map, i)
+        if ((t % 3) == 2):
+            for e in enemies:
+                e.move(self.map, p)
         return 0
